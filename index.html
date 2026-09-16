@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mayukh Pareek | Video Editor & Visual Storyteller</title>
+  <meta name="description" content="Portfolio of Mayukh Pareek - Video Editor & Visual Storyteller with 5+ years of experience in cinematic edits, storytelling reels, brand films, and long-form YouTube content." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#070708',
+              surface: '#0e0f12',
+              card: '#131419',
+              border: '#23252d',
+              accent: '#d97706', /* Subtle warm amber / gold film tone */
+              accentLight: '#fbbf24',
+              muted: '#8b8e99',
+              text: '#f3f4f6'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070708;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23252d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3a3e4b;
+    }
+
+    /* Cinematic grain overlay */
+    .film-grain {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+
+    /* Aspect ratios */
+    .aspect-vertical {
+      aspect-ratio: 9 / 16;
+    }
+    .aspect-video-ratio {
+      aspect-ratio: 16 / 9;
+    }
+  </style>
+</head>
+<body class="bg-brand-black text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-black relative">
+
+  <!-- Grain Ambient Layer -->
+  <div class="film-grain fixed inset-0 pointer-events-none z-50"></div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-brand-black/80 backdrop-blur-md border-b border-brand-border/60 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="group flex items-center gap-3 text-brand-text">
+        <div class="w-8 h-8 rounded-full border border-brand-accent/50 flex items-center justify-center bg-brand-surface group-hover:border-brand-accent transition-colors">
+          <span class="font-display font-bold text-xs text-brand-accentLight">MP</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-base tracking-wide group-hover:text-brand-accentLight transition-colors">Mayukh Pareek</span>
+          <span class="text-[10px] tracking-widest text-brand-muted uppercase font-mono">Editor & Visual Storyteller</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-muted">
+        <a href="#work" class="hover:text-brand-text transition-colors">Selected Work</a>
+        <a href="#about" class="hover:text-brand-text transition-colors">About</a>
+        <a href="#collaborations" class="hover:text-brand-text transition-colors">Clients</a>
+        <a href="#services" class="hover:text-brand-text transition-colors">Services</a>
+        <a href="#stories" class="hover:text-brand-text transition-colors">Stories</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="https://www.instagram.com/inkofmayukh?stkn=M3NjaDh3Nzd6MHNn" target="_blank" rel="noopener noreferrer" 
+           class="px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-semibold border border-brand-border bg-brand-surface hover:bg-brand-card hover:border-brand-accent/50 text-brand-text transition-all duration-200 flex items-center gap-2 group">
+          <i data-lucide="instagram" class="w-4 h-4 text-brand-accentLight group-hover:scale-110 transition-transform"></i>
+          <span>@inkofmayukh</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" aria-label="Toggle Navigation" class="md:hidden text-brand-muted hover:text-brand-text p-2">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileDrawer" class="hidden md:hidden bg-brand-surface border-b border-brand-border px-6 py-6 space-y-4">
+      <a href="#work" class="block text-brand-muted hover:text-brand-text py-2">Selected Work</a>
+      <a href="#about" class="block text-brand-muted hover:text-brand-text py-2">About</a>
+      <a href="#collaborations" class="block text-brand-muted hover:text-brand-text py-2">Clients</a>
+      <a href="#services" class="block text-brand-muted hover:text-brand-text py-2">Services</a>
+      <a href="#stories" class="block text-brand-muted hover:text-brand-text py-2">Stories</a>
+      <a href="https://www.instagram.com/inkofmayukh?stkn=M3NjaDh3Nzd6MHNn" target="_blank" rel="noopener noreferrer" 
+         class="inline-flex items-center gap-2 text-brand-accentLight font-semibold pt-2">
+        <i data-lucide="instagram" class="w-4 h-4"></i> @inkofmayukh
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center justify-center pt-24 px-6 md:px-12 overflow-hidden">
+      <!-- Subtle Cinematic Lighting Glow -->
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-brand-accent/10 rounded-full blur-[130px] pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
+        <!-- Experience badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-brand-border/80 bg-brand-surface/70 text-xs font-mono text-brand-muted mb-8 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+          <span>5+ Years of Editing Experience</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-brand-text leading-[1.1] mb-6">
+          Mayukh Pareek
+        </h1>
+
+        <p class="text-lg sm:text-2xl font-display font-medium text-brand-accentLight mb-4 tracking-wide">
+          Video Editor & Visual Storyteller
+        </p>
+
+        <p class="text-base sm:text-lg text-brand-muted max-w-2xl font-light leading-relaxed mb-10">
+          "Crafting stories through rhythm, visuals, and sound."
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+          <a href="#work" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-text text-brand-black font-semibold text-sm hover:bg-white hover:shadow-[0_0_25px_rgba(255,255,255,0.25)] transition-all duration-300 flex items-center justify-center gap-2 group">
+            <span>View My Work</span>
+            <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform"></i>
+          </a>
+          <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full border border-brand-border bg-brand-surface hover:bg-brand-card hover:border-brand-muted font-medium text-sm text-brand-text transition-all duration-300 flex items-center justify-center gap-2">
+            <span>Let's Work Together</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Selected Work / Showreel Section -->
+    <section id="work" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-brand-border/40">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+          <span class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-2 block">Portfolio</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-brand-text tracking-tight">
+            Selected Work
+          </h2>
+          <p class="text-brand-muted text-sm sm:text-base mt-2 max-w-xl">
+            A selection of edits, stories, and visual experiences I've created.
+          </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 text-xs font-medium" id="filterTabs">
+          <button data-filter="all" class="filter-btn active px-4 py-2 rounded-full border border-brand-accent bg-brand-accent/10 text-brand-accentLight transition-all">All Projects</button>
+          <button data-filter="reel" class="filter-btn px-4 py-2 rounded-full border border-brand-border bg-brand-surface text-brand-muted hover:text-brand-text transition-all">Shorts & Reels</button>
+          <button data-filter="youtube" class="filter-btn px-4 py-2 rounded-full border border-brand-border bg-brand-surface text-brand-muted hover:text-brand-text transition-all">YouTube & Long Form</button>
+          <button data-filter="storytelling" class="filter-btn px-4 py-2 rounded-full border border-brand-border bg-brand-surface text-brand-muted hover:text-brand-text transition-all">Storytelling</button>
+          <button data-filter="brand" class="filter-btn px-4 py-2 rounded-full border border-brand-border bg-brand-surface text-brand-muted hover:text-brand-text transition-all">Brand & Agency</button>
+        </div>
+      </div>
+
+      <!-- Portfolio Grid -->
+      <div id="portfolioGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
+        
+        <!-- Short 1 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="reel" data-tags="reel storytelling" data-ytid="LXPXdHKU5uM">
+          <div class="relative aspect-vertical w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="LXPXdHKU5uM" data-title="Storytelling Reel Edit #01">
+            <img src="https://img.youtube.com/vi/LXPXdHKU5uM/hqdefault.jpg" alt="Storytelling Reel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <!-- Play Indicator -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">Reel • 9:16</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>Storytelling Reels</span>
+              <span>Short Form</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Pacing & Narrative Short
+            </h3>
+          </div>
+        </div>
+
+        <!-- Short 2 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="reel" data-tags="reel storytelling" data-ytid="7l7N3eM1qe8">
+          <div class="relative aspect-vertical w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="7l7N3eM1qe8" data-title="Cinematic Social Edit">
+            <img src="https://img.youtube.com/vi/7l7N3eM1qe8/hqdefault.jpg" alt="Cinematic Edit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">Reel • 9:16</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>Cinematic Edits</span>
+              <span>Rhythm</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Cinematic Reel Cut
+            </h3>
+          </div>
+        </div>
+
+        <!-- Long Form 1 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300 sm:col-span-2 lg:col-span-1"
+             data-type="youtube" data-tags="youtube brand" data-ytid="aj9q4a7d3to">
+          <div class="relative aspect-video-ratio w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="aj9q4a7d3to" data-title="Long-Form Narrative Showcase">
+            <img src="https://img.youtube.com/vi/aj9q4a7d3to/hqdefault.jpg" alt="Long Form Edit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">YouTube • 16:9</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>YouTube Editing</span>
+              <span>Long Form</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Featured Narrative Project #01
+            </h3>
+          </div>
+        </div>
+
+        <!-- Short 3 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="reel" data-tags="reel storytelling" data-ytid="0VeUDc7Z_BQ">
+          <div class="relative aspect-vertical w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="0VeUDc7Z_BQ" data-title="Visual Narrative Short">
+            <img src="https://img.youtube.com/vi/0VeUDc7Z_BQ/hqdefault.jpg" alt="Visual Short" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">Reel • 9:16</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>Storytelling Reels</span>
+              <span>Social Media</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Sound & Motion Story
+            </h3>
+          </div>
+        </div>
+
+        <!-- Long Form 2 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="youtube" data-tags="youtube storytelling brand" data-ytid="vKn6C34Z7X4">
+          <div class="relative aspect-video-ratio w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="vKn6C34Z7X4" data-title="Long-Form Documentary Edit">
+            <img src="https://img.youtube.com/vi/vKn6C34Z7X4/hqdefault.jpg" alt="Documentary Edit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">YouTube • 16:9</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>Narrative Editing</span>
+              <span>Long Form</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Pacing & Atmosphere Film Cut
+            </h3>
+          </div>
+        </div>
+
+        <!-- Short 4 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="reel" data-tags="reel brand" data-ytid="zjVldad7u2c">
+          <div class="relative aspect-vertical w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="zjVldad7u2c" data-title="Brand Reel Cut">
+            <img src="https://img.youtube.com/vi/zjVldad7u2c/hqdefault.jpg" alt="Brand Reel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">Reel • 9:16</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>Brand Reels</span>
+              <span>Social Media</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Modern Promotional Reel
+            </h3>
+          </div>
+        </div>
+
+        <!-- Long Form 3 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="youtube" data-tags="youtube storytelling" data-ytid="I9AVAe05QuE">
+          <div class="relative aspect-video-ratio w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="I9AVAe05QuE" data-title="Creative Direction Edit">
+            <img src="https://img.youtube.com/vi/I9AVAe05QuE/hqdefault.jpg" alt="Creative Edit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">YouTube • 16:9</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>YouTube Editing</span>
+              <span>Cinematic</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Cinematic Journey Edit
+            </h3>
+          </div>
+        </div>
+
+        <!-- Short 5 -->
+        <div class="work-card group rounded-2xl overflow-hidden bg-brand-card border border-brand-border/70 hover:border-brand-accent/50 transition-all duration-300"
+             data-type="reel" data-tags="reel storytelling" data-ytid="Ra1RbsuyBiI">
+          <div class="relative aspect-vertical w-full overflow-hidden bg-brand-surface cursor-pointer open-video" data-ytid="Ra1RbsuyBiI" data-title="Visual Experience Edit">
+            <img src="https://img.youtube.com/vi/Ra1RbsuyBiI/hqdefault.jpg" alt="Visual Experience" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-14 h-14 rounded-full bg-brand-black/70 border border-white/20 flex items-center justify-center text-white backdrop-blur-sm group-hover:scale-110 group-hover:bg-brand-accent transition-all duration-300">
+                <i data-lucide="play" class="w-6 h-6 fill-current translate-x-0.5"></i>
+              </div>
+            </div>
+            <span class="absolute top-4 left-4 font-mono text-[10px] uppercase tracking-wider bg-brand-black/80 px-2.5 py-1 rounded-md border border-white/10 text-white">Reel • 9:16</span>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center justify-between text-xs text-brand-muted mb-2 font-mono">
+              <span>Social Media Content</span>
+              <span>Cinematic</span>
+            </div>
+            <h3 class="text-base font-display font-semibold text-brand-text group-hover:text-brand-accentLight transition-colors">
+              Atmospheric Short Form
+            </h3>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. About Me Section -->
+    <section id="about" class="py-24 px-6 md:px-12 border-t border-brand-border/40 bg-brand-surface/40">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Portrait Image -->
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="relative group rounded-2xl overflow-hidden border border-brand-border bg-brand-card aspect-[4/5] flex items-center justify-center shadow-2xl shadow-black/60">
+            <!-- Frame Overlay Elements -->
+            <div class="absolute top-4 left-4 z-20 font-mono text-[10px] text-white/90 bg-brand-black/80 px-2.5 py-1 rounded border border-white/10 flex items-center gap-1.5 backdrop-blur-md">
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+              <span>REC // 24 FPS</span>
+            </div>
+            <div class="absolute top-4 right-4 z-20 font-mono text-[10px] text-white/90 bg-brand-black/80 px-2 py-1 rounded border border-white/10 backdrop-blur-md">
+              ISO 400
+            </div>
+
+            <!-- Profile Photo -->
+            <img 
+              src="https://github.com/YashSoni080/mayukhportfolio/blob/main/1000107214.jpg.jpeg?raw=true" 
+              alt="Mayukh Pareek - Video Editor" 
+              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-[0.96] contrast-[1.04]"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop';" 
+            />
+
+            <!-- Gradient Shadow Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black/95 via-transparent to-black/20 pointer-events-none"></div>
+
+            <div class="absolute bottom-5 left-5 right-5 z-20">
+              <span class="font-display font-bold text-white text-lg block">Mayukh Pareek</span>
+              <span class="text-xs text-brand-accentLight font-mono">Video Editor & Visual Storyteller</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Text -->
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <span class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-2 block">Background</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-brand-text tracking-tight mb-8">
+            Intentional Editing.<br/>Clear Communication.
+          </h2>
+          
+          <div class="space-y-6 text-brand-muted text-base sm:text-lg font-light leading-relaxed">
+            <p>
+              I’m <strong class="text-brand-text font-semibold">Mayukh Pareek</strong>, a video editor and visual storyteller with 5+ years of experience turning ideas into engaging visual content.
+            </p>
+            <p>
+              From storytelling reels to brand videos and long-form content, I focus on editing that feels intentional, communicates clearly, and keeps the audience watching.
+            </p>
+            <p class="text-sm text-brand-text/90 font-normal border-l-2 border-brand-accent pl-4 py-1">
+              Collaborated on creative and commercial deliverables with teams including <span class="text-brand-accentLight">Futureix</span>, <span class="text-brand-accentLight">Blue Lily Production</span>, alongside various independent creative projects.
+            </p>
+          </div>
+
+          <div class="mt-8 pt-8 border-t border-brand-border/60 grid grid-cols-2 sm:grid-cols-3 gap-6">
+            <div>
+              <span class="block text-2xl font-display font-bold text-brand-text">5+</span>
+              <span class="text-xs font-mono text-brand-muted uppercase">Years Experience</span>
+            </div>
+            <div>
+              <span class="block text-2xl font-display font-bold text-brand-text">9:16 & 16:9</span>
+              <span class="text-xs font-mono text-brand-muted uppercase">Multi-format Focus</span>
+            </div>
+            <div>
+              <span class="block text-2xl font-display font-bold text-brand-text">Rhythm</span>
+              <span class="text-xs font-mono text-brand-muted uppercase">Narrative Driven</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Client / Collaboration Section -->
+    <section id="collaborations" class="py-20 px-6 md:px-12 max-w-7xl mx-auto border-t border-brand-border/40 text-center">
+      <span class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-3 block">Selected Collaborations</span>
+      <h2 class="text-2xl sm:text-3xl font-display font-bold text-brand-text mb-4">
+        Trusted by Creative Teams & Brands
+      </h2>
+      <p class="text-brand-muted max-w-xl mx-auto text-sm sm:text-base mb-12">
+        Working with brands, creators, and teams to shape ideas into compelling visual stories.
+      </p>
+
+      <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+        <div class="px-8 py-5 rounded-xl border border-brand-border/70 bg-brand-surface/60 hover:border-brand-accent/40 transition-colors flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-brand-accent"></div>
+          <span class="font-display font-semibold text-lg text-brand-text tracking-wide">Futureix</span>
+        </div>
+
+        <div class="px-8 py-5 rounded-xl border border-brand-border/70 bg-brand-surface/60 hover:border-brand-accent/40 transition-colors flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-brand-accent"></div>
+          <span class="font-display font-semibold text-lg text-brand-text tracking-wide">Blue Lily Production</span>
+        </div>
+
+        <div class="px-8 py-5 rounded-xl border border-brand-border/70 bg-brand-surface/60 hover:border-brand-accent/40 transition-colors flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-brand-muted"></div>
+          <span class="font-display font-medium text-base text-brand-muted tracking-wide">Independent Creators</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Editing Services Section -->
+    <section id="services" class="py-24 px-6 md:px-12 border-t border-brand-border/40 bg-brand-surface/30">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-2xl mb-14">
+          <span class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-2 block">Capabilities</span>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-brand-text tracking-tight">
+            What I Edit
+          </h2>
+          <p class="text-brand-muted text-sm sm:text-base mt-2">
+            Tailored visual storytelling designed for engagement, retention, and cinematic polish.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div class="p-8 rounded-2xl bg-brand-card border border-brand-border/60 hover:border-brand-accent/40 transition-all group">
+            <div class="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-accentLight mb-6 group-hover:border-brand-accent transition-colors">
+              <i data-lucide="smartphone" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-display font-bold text-brand-text mb-2">Short-Form Reels</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Snappy, retention-focused edits built for Instagram Reels and Shorts that grab attention within the first second.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-8 rounded-2xl bg-brand-card border border-brand-border/60 hover:border-brand-accent/40 transition-all group">
+            <div class="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-accentLight mb-6 group-hover:border-brand-accent transition-colors">
+              <i data-lucide="book-open" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-display font-bold text-brand-text mb-2">Storytelling Videos</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Narrative pacing that weaves voiceover, archival clips, and sound design into an immersive, emotive experience.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-8 rounded-2xl bg-brand-card border border-brand-border/60 hover:border-brand-accent/40 transition-all group">
+            <div class="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-accentLight mb-6 group-hover:border-brand-accent transition-colors">
+              <i data-lucide="briefcase" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-display font-bold text-brand-text mb-2">Brand & Promotional Videos</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              High-impact promotional media for businesses and agencies, highlighting product value with modern aesthetics.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-8 rounded-2xl bg-brand-card border border-brand-border/60 hover:border-brand-accent/40 transition-all group">
+            <div class="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-accentLight mb-6 group-hover:border-brand-accent transition-colors">
+              <i data-lucide="youtube" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-display font-bold text-brand-text mb-2">YouTube Videos</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Long-form structuring, seamless transitions, and narrative rhythm tuned specifically for channel watch time and audience retention.
+            </p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="p-8 rounded-2xl bg-brand-card border border-brand-border/60 hover:border-brand-accent/40 transition-all group">
+            <div class="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-accentLight mb-6 group-hover:border-brand-accent transition-colors">
+              <i data-lucide="film" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-display font-bold text-brand-text mb-2">Cinematic Edits</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Carefully calibrated color palettes, evocative soundscapes, and deliberate motion that mirror a film aesthetic.
+            </p>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="p-8 rounded-2xl bg-brand-card border border-brand-border/60 hover:border-brand-accent/40 transition-all group">
+            <div class="w-12 h-12 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-accentLight mb-6 group-hover:border-brand-accent transition-colors">
+              <i data-lucide="share-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-lg font-display font-bold text-brand-text mb-2">Social Media Content</h3>
+            <p class="text-sm text-brand-muted leading-relaxed">
+              Consistent, high-quality video assets tailored for cross-platform distribution and creator brand recognition.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Personal Storytelling / Instagram Section -->
+    <section id="stories" class="py-24 px-6 md:px-12 border-t border-brand-border/40">
+      <div class="max-w-5xl mx-auto rounded-3xl bg-gradient-to-b from-brand-card to-brand-surface border border-brand-border/80 p-8 sm:p-14 relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-80 h-80 bg-brand-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-2xl">
+          <span class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-3 block">Personal Work</span>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-brand-text tracking-tight mb-4">
+            Stories I Tell
+          </h2>
+          <p class="text-brand-muted text-base sm:text-lg leading-relaxed mb-6">
+            Beyond client work, I create storytelling reels on my personal Instagram, exploring films, experiences, emotions, and everyday observations through editing and narrative.
+          </p>
+
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-full bg-brand-black border border-brand-accent/40 flex items-center justify-center text-brand-accentLight">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <span class="font-display font-bold text-brand-text text-base block">@inkofmayukh</span>
+              <span class="text-xs font-mono text-brand-muted">Visual Stories & Video Essays</span>
+            </div>
+          </div>
+
+          <a href="https://www.instagram.com/inkofmayukh?stkn=M3NjaDh3Nzd6MHNn" target="_blank" rel="noopener noreferrer" 
+             class="inline-flex items-center gap-3 px-7 py-3.5 rounded-full bg-brand-text text-brand-black font-semibold text-sm hover:bg-brand-accentLight hover:text-brand-black transition-all duration-300 group">
+            <span>Explore My Stories</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-12 border-t border-brand-border/40 bg-brand-surface/40">
+      <div class="max-w-4xl mx-auto text-center mb-14">
+        <span class="text-xs font-mono tracking-widest text-brand-accent uppercase mb-2 block">Collaboration</span>
+        <h2 class="text-3xl sm:text-5xl font-display font-bold text-brand-text tracking-tight mb-4">
+          Have a story to tell?
+        </h2>
+        <p class="text-brand-muted text-base sm:text-lg max-w-xl mx-auto">
+          "Let’s turn your idea into something worth watching."
+        </p>
+      </div>
+
+      <div class="max-w-xl mx-auto">
+        <!-- Direct Instagram CTA -->
+        <div class="p-6 rounded-2xl bg-brand-card border border-brand-border text-center mb-8">
+          <p class="text-sm text-brand-muted mb-4">
+            Direct message is currently the fastest way to get in touch regarding editing projects, availability, or consultations.
+          </p>
+          <a href="https://www.instagram.com/inkofmayukh?stkn=M3NjaDh3Nzd6MHNn" target="_blank" rel="noopener noreferrer" 
+             class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-brand-accent text-brand-black font-semibold text-sm hover:bg-brand-accentLight transition-colors">
+            <i data-lucide="instagram" class="w-4 h-4"></i>
+            <span>Message on Instagram (@inkofmayukh)</span>
+          </a>
+        </div>
+
+        <!-- Optional Inquiry Form -->
+        <form class="space-y-4" onsubmit="event.preventDefault(); window.open('https://www.instagram.com/inkofmayukh?stkn=M3NjaDh3Nzd6MHNn', '_blank');">
+          <div>
+            <label class="block text-xs font-mono text-brand-muted mb-2 uppercase">Your Name</label>
+            <input type="text" required placeholder="Name or Brand" 
+                   class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-brand-text text-sm focus:outline-none focus:border-brand-accent transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-mono text-brand-muted mb-2 uppercase">Your Contact / Handle</label>
+            <input type="text" required placeholder="Instagram Handle or Contact Details" 
+                   class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-brand-text text-sm focus:outline-none focus:border-brand-accent transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-mono text-brand-muted mb-2 uppercase">Project Details</label>
+            <textarea rows="4" required placeholder="Tell me about your video project, timeline, and format (Reels, YouTube, Brand Video)..." 
+                      class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-brand-text text-sm focus:outline-none focus:border-brand-accent transition-colors"></textarea>
+          </div>
+          <button type="submit" 
+                  class="w-full py-4 rounded-xl border border-brand-border bg-brand-surface hover:bg-brand-card hover:border-brand-accent text-brand-text font-semibold text-sm transition-all flex items-center justify-center gap-2">
+            <span>Start a Conversation</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 8. Footer -->
+  <footer class="py-12 px-6 md:px-12 border-t border-brand-border/60 bg-brand-black text-brand-muted text-xs font-mono">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <span class="font-display font-bold text-sm text-brand-text">Mayukh Pareek</span>
+        <span>Video Editor & Visual Storyteller</span>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <a href="#work" class="hover:text-brand-text transition-colors">Work</a>
+        <a href="#about" class="hover:text-brand-text transition-colors">About</a>
+        <a href="#collaborations" class="hover:text-brand-text transition-colors">Clients</a>
+        <a href="#services" class="hover:text-brand-text transition-colors">Services</a>
+        <a href="https://www.instagram.com/inkofmayukh?stkn=M3NjaDh3Nzd6MHNn" target="_blank" rel="noopener noreferrer" class="hover:text-brand-text transition-colors">Instagram</a>
+        <a href="#contact" class="hover:text-brand-text transition-colors">Contact</a>
+      </div>
+
+      <div class="text-center md:text-right">
+        <span>© 2026 Mayukh Pareek. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Modal Player -->
+  <div id="videoModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-8">
+    <div class="relative w-full max-w-4xl bg-brand-surface border border-brand-border rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-brand-border bg-brand-card">
+        <span id="modalVideoTitle" class="font-display font-semibold text-sm text-brand-text truncate">Video Preview</span>
+        <button id="closeModalBtn" class="text-brand-muted hover:text-white p-1 rounded-lg hover:bg-brand-border transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <!-- Video Frame Container -->
+      <div class="relative w-full aspect-video bg-black" id="modalPlayerWrapper">
+        <!-- iframe dynamically injected -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Mobile navigation toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('hidden');
+    });
+
+    // Close drawer when clicking links
+    mobileDrawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+    });
+
+    // Portfolio Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const workCards = document.querySelectorAll('.work-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Style active button
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'border-brand-accent', 'bg-brand-accent/10', 'text-brand-accentLight');
+          b.classList.add('border-brand-border', 'bg-brand-surface', 'text-brand-muted');
+        });
+        btn.classList.remove('border-brand-border', 'bg-brand-surface', 'text-brand-muted');
+        btn.classList.add('active', 'border-brand-accent', 'bg-brand-accent/10', 'text-brand-accentLight');
+
+        const filter = btn.getAttribute('data-filter');
+
+        workCards.forEach(card => {
+          const tags = card.getAttribute('data-tags') || '';
+          const type = card.getAttribute('data-type') || '';
+          if (filter === 'all' || tags.includes(filter) || type === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Video Modal Logic
+    const videoModal = document.getElementById('videoModal');
+    const modalPlayerWrapper = document.getElementById('modalPlayerWrapper');
+    const modalVideoTitle = document.getElementById('modalVideoTitle');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    document.querySelectorAll('.open-video').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const ytid = trigger.getAttribute('data-ytid');
+        const title = trigger.getAttribute('data-title') || 'Video Showcase';
+        
+        modalVideoTitle.textContent = title;
+        modalPlayerWrapper.innerHTML = `
+          <iframe 
+            class="w-full h-full" 
+            src="https://www.youtube.com/embed/${ytid}?autoplay=1&rel=0&modestbranding=1" 
+            title="${title}" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        `;
+        videoModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      videoModal.classList.add('hidden');
+      modalPlayerWrapper.innerHTML = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !videoModal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
